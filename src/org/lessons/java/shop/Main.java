@@ -10,24 +10,31 @@ public class Main {
 
         Product[] listOfProducts = new Product[numberOfProducts];
 
-        for (int i = 0; i < listOfProducts.length ; i++) {
-            System.out.println("What's prduct's name ?");
-            String productName = scanner.nextLine();
-            System.out.println("Describe the product");
-            String productDescription = scanner.nextLine();
-            System.out.println("How much does the product cost");
-            double productPrice = Double.parseDouble(scanner.nextLine());
-            Product product = new Product(productName,productDescription,productPrice);
-            listOfProducts[i] = product;
-        }
+        try {
+            for (int i = 0; i < listOfProducts.length ; i++) {
+                System.out.println("What's prduct's name ?");
+                String productName = scanner.nextLine();
+                System.out.println("Describe the product");
+                String productDescription = scanner.nextLine();
+                System.out.println("How much does the product cost");
+                double productPrice = Double.parseDouble(scanner.nextLine());
+                System.out.println("Insert IVA");
+                double iva = Double.parseDouble(scanner.nextLine());
+                Product product = new Product(productName,productDescription,productPrice,iva);
+                listOfProducts[i] = product;
+            }
+
         System.out.println("Your products");
         for (int i = 0; i < listOfProducts.length ; i++) {
             System.out.println("Product:" + listOfProducts[i].getProductName()+" "
                     + listOfProducts[i].getProductCode()+" "
                     +"Description:"+" "
                     +listOfProducts[i].getProductDescription()+" "
-                    +"Price"+listOfProducts[i].getProductPrice()+"$"+" "
-                    +"Price with IVA:"+ listOfProducts[i].getIva()+"$");
+                    +"Price:"+" "+listOfProducts[i].getProductPrice()+"$"+" "
+                    +"Price with IVA:"+ listOfProducts[i].priceIva() +"$");
+        }
+        }catch (IllegalArgumentException e) {
+            System.out.println("Invalid data: " + e.getMessage());
         }
       scanner.close();
     }

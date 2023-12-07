@@ -14,8 +14,16 @@ public class Product {
 
             //Costruttori
 
-            public Product(String productName, String productDescription, double productPrice) {
-                this.productCode = productCode;
+            public Product(String productName, String productDescription, double productPrice, double iva)throws IllegalArgumentException{
+                if (productName == null || productName.isEmpty()){
+                    throw  new IllegalArgumentException("Product name must be not empty");
+                }
+                if (productPrice<=0){
+                    throw new IllegalArgumentException("Price must be >=0");
+                }
+                if (iva<=0){
+                    throw new IllegalArgumentException("Iva must be >=0");
+                }
                 this.productName = productName;
                 this.productDescription = productDescription;
                 this.productPrice = productPrice;
@@ -41,8 +49,7 @@ public class Product {
            }
 
            public double getIva() {
-                iva = productPrice*1.22;
-               return iva;
+                return iva;
           }
 
           public void setProductName(String  productName){
@@ -67,6 +74,9 @@ public class Product {
 
             public int randomProductCode = randomCode.nextInt(10000,999999);
 
-            public double priceIva = productPrice * 1.22;
+            public double priceIva(){
+              return  productPrice += productPrice/100 * iva;
+
+            }
 
 }
